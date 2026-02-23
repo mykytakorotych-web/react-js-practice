@@ -1,0 +1,30 @@
+concurrent mode - этапы
+
+Life cycle in classes - names
+ErrorBoundary
+
+Suspense, lazy loading
+
+createElement, cloneElement
+
+redux, redux-toolkit
+
+react hooks 18 + 19
+useActionState()
+useOptimistic()
+
+v18
+useTransition()
+useDefferedValue()
+
+
+Запросы к API - XMLHTTPRequest
+response.JSON 
+
+cache()
+server Components in React
+server rendering
+requestAnimationFrame
+Directives 'use client' 'use server'
+
+Next.js 12 difference Next.js 13
