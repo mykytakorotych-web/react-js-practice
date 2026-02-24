@@ -27,8 +27,25 @@ ul {
 
 a {
   text-decoration: none;
+  color: var(--text-primary);
+}
+.hoverEffect {
+  border-radius: .8rem;
+  border-top: 1px transparent solid;
+  transition: all 0.2s;
+}
+
+.hoverEffect:hover {
+  color: var(--text-primary);
+  background: var(--bg-hover);
+  border-color: var(--text-primary);
 }
 
 main {
   padding: 1rem 2rem;
+}
+
+button, input {
+  background: none;
+  border: none;
 }

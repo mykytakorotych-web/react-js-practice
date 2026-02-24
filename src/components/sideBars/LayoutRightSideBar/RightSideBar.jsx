@@ -1,5 +1,7 @@
 "use client"
 
+import { Search, UserCog } from 'lucide-react'
+import { Link } from "react-router"
 import { useGetUsersQuery } from "../../../store/api/usersApi.js"
 import "./RightSideBar.css"
 
@@ -11,17 +13,34 @@ export function RightSideBar() {
 
   return (
     <aside className="rightNavBar">
-      <ul>
-        {data.users.map(user => (
-          <li key={user.id}>
-            <img className='userImage' src={user.image} alt={user.firstName} />
-
-            <div>
-              <h4>{user.firstName}</h4>
-            </div>
-          </li>
-        ))}
-      </ul>
+      <section className='sectionSearch'>
+        <div className='searchInput'>
+          <button className='searchBtn'><Search size={18}/></button>
+          <input type="text" placeholder='Search for a friend'/>
+        </div>
+        <button className='searchFilterBtn'>
+          <UserCog size={18}/>
+        </button>
+      </section>
+      <section className='usersSection'>
+        <h3>Users</h3>
+        <ul className="userList">
+          {data.users.map(user => (
+            <li className="userItem hoverEffect" key={user.id}>
+              <Link to={`/user/${user.id}`}>
+                <img
+                  className="userImage"
+                  src={user.image}
+                  alt={user.firstName}
+                />
+                <div>
+                  <h4>{user.firstName}</h4>
+                </div>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
     </aside>
   )
 }

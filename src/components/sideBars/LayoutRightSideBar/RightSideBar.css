@@ -3,3 +3,62 @@
   height: 32px;
   border-radius: 100%;
 }
+
+.usersSection {
+  color: var(--text-secondary);
+}
+
+.userList {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.userItem > a {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  padding: 0.5rem;
+}
+
+.sectionSearch{
+  display: flex;
+  gap: .5rem;
+  padding-bottom: 1rem;
+}
+
+.searchInput{
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  background: #25213f;
+  border: 1px var(--text-secondary) solid;
+  padding: .2rem .5rem .1rem .5rem;
+  border-radius: .5rem;
+}
+
+.searchBtn {
+  color: var(--text-primary);
+}
+
+.searchInput input{
+  width: 100%;
+  outline: none;
+  color: var(--text-primary);
+}
+
+.searchInput:focus-within {
+  border-color: var(--text-primary);
+}
+
+.searchFilterBtn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 28px;
+  border-radius: .5rem;
+  background: #25213f;
+  border: 1px var(--text-secondary) solid;
+  color: var(--text-primary);
+}
