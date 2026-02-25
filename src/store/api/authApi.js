@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import Cookies from 'js-cookie'
-import { setCredentials } from '../slices/authSlice'
+import { setCredentials, setUser } from '../slices/authSlice'
 
 export const authApi = createApi({
   reducerPath: 'authApi',
@@ -22,23 +22,23 @@ export const authApi = createApi({
         body: credentials,
       }),
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
-        const userObj = {
-          id: data.id,
-          username: data.username,
-          email: data.email,
-          firstName: data.firstName,
-          lastName: data.lastName,
-          image: data.image
-        }
-        // 1. Сохраняем в Redux
-        dispatch(setCredentials({ user: userObj, token: data.accessToken }))
-
-        // 2. Сохраняем в LocalStorage (чтобы пережить F5) 👇
-        localStorage.setItem('user', JSON.stringify(userObj))
         try {
           const { data } = await queryFulfilled
+
+          const userObj = {
+            id: data.id,
+            username: data.username,
+            email: data.email,
+            firstName: data.firstName,
+            lastName: data.lastName,
+            image: data.image
+          }
+
+
           Cookies.set('token', data.accessToken, { expires: 1, secure: true })
           Cookies.set('refreshToken', data.refreshToken, { expires: 7, secure: true })
+          localStorage.setItem('user', JSON.stringify(userObj))
+          dispatch(setCredentials({ user: userObj, token: data.accessToken }))
 
           dispatch(setCredentials({
             user: {

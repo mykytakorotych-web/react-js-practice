@@ -26,12 +26,7 @@ export function LeftSideBar() {
     <aside className="leftNavBar">
       <nav>
         <SiteLogo />
-        {isAuth && user && (
-          <div>
-            <img src={user.image ? user.image : ""} alt={user.username} />
-            <span>{user.username}</span>
-          </div>
-        )}
+
         {navigationPages.map(item => (
           <NavLink
             key={item.href}
@@ -43,17 +38,25 @@ export function LeftSideBar() {
           </NavLink>
         ))}
       </nav>
-      {isAuth ? (
-        <button onClick={handleLogout} className="logoutBtn">
-          <LogOut size={20} />
-          <span>Logout</span>
-        </button>
-      ) : (
-        <Link to="/login" className="loginLink">
-          <DoorOpenIcon />
-          <span>Login</span>
-        </Link>
-      )}
+      <div className='leftNavBarFooter'>
+        {isAuth && user && (
+          <div className="userProfileCard">
+            <img src={user.image ? user.image : ""} alt={user.username} />
+            <h4>{user.username[0].toUpperCase() + user.username.slice(1)}</h4>
+          </div>
+        )}
+        {isAuth ? (
+          <button onClick={handleLogout} className="logoutBtn">
+            <LogOut size={20} />
+            <span>Logout</span>
+          </button>
+        ) : (
+          <Link to="/login" className="loginLink">
+            <DoorOpenIcon />
+            <span>Login</span>
+          </Link>
+        )}
+      </div>
     </aside>
   )
 }

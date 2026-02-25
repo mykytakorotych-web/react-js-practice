@@ -39,6 +39,29 @@
   opacity: .85;
 }
 
+.userProfileCard {
+  display: flex;
+  align-items: center;
+  margin: 1rem 0;
+  gap: .5rem;
+}
+
+.userProfileCard > img {
+  width: 24px;
+  border-radius: 100%;
+}
+
+.userProfileCard > h4 {
+  display: none;
+}
+
+.leftNavBarFooter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
 @media (min-width: 768px) {
   .leftNavBarLinkName {
     display: block;
@@ -62,5 +85,13 @@
 
   .loginLink > span, .logoutBtn > span {
     display: block;
+  }
+
+  .userProfileCard > h4 {
+    display: block;
+  }
+
+  .leftNavBarFooter {
+    align-items: start;
   }
 }

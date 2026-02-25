@@ -7,6 +7,18 @@ export const recipesApi = createApi({
 
     getRecipes: builder.query({
       query: ({ limit = 10, skip = 0 } = {}) => `recipes/?limit=${limit}&skip=${skip}`,
+
+      serializeQueryArgs: ({ endpointName }) => {
+        return endpointName
+      },
+
+      merge: (currentCache, newItems) => {
+        currentCache.recipes.push(...newItems.recipes)
+      },
+
+      forceRefetch({ currentArg, previousArg }) {
+        return currentArg?.skip !== previousArg?.skip
+      },
     }),
 
     getSingleRecipe: builder.query({

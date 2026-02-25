@@ -1,21 +1,25 @@
 export async function loginAction(prevState, formData) {
-  await new Promise(resolve => setTimeout(resolve, 1000))
 
-  const email = formData.get("email")
+  const username = formData.get("username")
   const password = formData.get("password")
 
-  if (email === "admin@gmail.com" && password === "12345") {
-    return {
-      success: true,
-      user: { name: "Admin" },
-      error: null
-    }
-  }
+  const form = e.target
+  const formData = new FormData(form)
 
+  try {
+    await login({
+      username: formData.get('username'),
+      password: formData.get('password')
+    }).unwrap()
+
+    navigate('/')
+  } catch (err) {
+    console.error('Failed to login', err)
+  }
   return {
     success: false,
     user: null,
-    error: "Неверный email или пароль"
+    error: "Not valid username or password"
   }
 }
 
