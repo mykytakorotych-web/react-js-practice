@@ -1,47 +1,79 @@
 "use client"
 
-import { ArrowLeft } from 'lucide-react'
-import { useActionState, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router'
-import { SiteLogo } from '../../components/ui/siteLogo/SiteLogo'
+import { ArrowLeft } from "lucide-react"
+import { Link, useNavigate } from "react-router"
+import { SiteLogo } from "../../components/ui/siteLogo/SiteLogo"
+import { useLoginMutation } from "../../store/api/authApi"
 import "./LoginPage.css"
-import { initialState, loginAction } from './actions/loginAction'
 
 export function LoginPage() {
-  const [state, formAction, isPending] = useActionState(loginAction, initialState);
-  const navigate = useNavigate();
+  const [login, { isLoading, error }] = useLoginMutation()
+  const navigate = useNavigate()
 
-  useEffect(() => {
-    if (state.success) {
-      navigate("/"); 
+  const handleSubmit = async e => {
+    e.preventDefault()
+    const form = e.target
+    const formData = new FormData(form)
+
+    try {
+      // unwrap() позволяет поймать ошибку через catch здесь, если нужно
+      await login({
+        username: formData.get("username"), // DummyJSON требует username, не email
+        password: formData.get("password"),
+      }).unwrap()
+
+      // Если всё ок, нас перекинет на главную
+      navigate("/")
+    } catch (err) {
+      console.error("Failed to login", err)
     }
-  }, [state.success, navigate]);
+  }
 
   return (
-    <div className='container'>
+    <div className="container">
       <div className="loginSection">
         <div className="loginWrapper">
-        <button onClick={() => navigate(-1)} className="back-btn">
-          <ArrowLeft size={20} />
-          Back to recipes
-        </button>
-          <SiteLogo/>
+          <button onClick={() => navigate(-1)} className="back-btn">
+            <ArrowLeft size={20} />
+            Back to recipes
+          </button>
+          <SiteLogo />
 
-          <form className="loginForm" action={formAction}>
-            {state.error && (
-              <div style={{ color: 'red', marginBottom: '10px' }}>
-                {state.error}
+          <form className="loginForm" onSubmit={handleSubmit}>
+            {/* Внутри формы, перед инпутами */}
+
+            {error && (
+              <div style={{ color: "red", marginBottom: "10px" }}>
+                {/* Вариант 1: Ошибка от сервера (например, неверный пароль) */}
+                {"data" in error
+                  ? error.data?.message || "Ошибка входа"
+                  : /* Вариант 2: Системная ошибка (нет интернета или упал JS) */
+                    "message" in error
+                    ? error.message
+                    : "Неизвестная ошибка"}
               </div>
             )}
             <div className="inputGroup">
-              <input name="email" type="email" placeholder="Email address" disabled={isPending} required />
+              <input
+                name="username"
+                type="text"
+                placeholder="Email address"
+                disabled={isLoading}
+                required
+              />
             </div>
             <div className="inputGroup">
-              <input name="password" type="password" placeholder="Password" disabled={isPending} required />
+              <input
+                name="password"
+                type="password"
+                placeholder="Password"
+                disabled={isLoading}
+                required
+              />
             </div>
 
-            <button type="submit" className="btnPrimary" disabled={isPending}>
-              {isPending ? "Logging in..." : "Log in"}
+            <button type="submit" className="btnPrimary" disabled={isLoading}>
+              {isLoading ? "Logging in..." : "Log in"}
             </button>
           </form>
 

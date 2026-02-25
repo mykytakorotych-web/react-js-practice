@@ -17,7 +17,7 @@
   display: none;
 }
 
-.loginLink {
+.loginLink, .logoutBtn{
   display: flex;
   align-items: center;
   width: fit-content;
@@ -28,10 +28,14 @@
   border-radius: .8rem;
   transition: opacity .2s;
 }
-.loginLink > span{
+.logoutBtn {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+.loginLink > span, .logoutBtn > span{
   display: none;
 }
-.loginLink:hover {
+.loginLink:hover, .logoutBtn:hover {
   opacity: .85;
 }
 
@@ -52,11 +56,11 @@
     width: 100%;
   }
 
-  .loginLink {
+  .loginLink, .logoutBtn {
     width: 100%;
   }
 
-  .loginLink > span {
+  .loginLink > span, .logoutBtn > span {
     display: block;
   }
 }

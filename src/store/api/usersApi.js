@@ -12,8 +12,7 @@ export const usersApi = createApi({
           params: { q: searchQuery, limit: searchQuery.length < 3 ? '10' : '0' },
         }
       },
-    }),
-
+    })
   }),
 })
 
