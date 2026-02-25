@@ -1,0 +1,95 @@
+.recipe-card {
+  background-color: var(--bg-secondary);
+  border-radius: 20px; 
+  overflow: hidden; 
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  height: 100%; 
+  border: 1px solid transparent;
+}
+
+.recipe-card:hover {
+  background-color: var(--bg-hover);
+  transform: translateY(-5px); 
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+  border-color: rgba(36, 99, 235, 0.2); 
+}
+
+.recipe-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.card-image-wrapper {
+  width: 100%;
+  aspect-ratio: 3 / 2; 
+  overflow: hidden;
+  position: relative;
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.recipe-card:hover .card-image {
+  transform: scale(1.05);
+}
+
+.cuisine-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background-color: rgba(8, 10, 28, 0.8); 
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  padding: 4px 10px;
+  border-radius: 20px;
+  backdrop-filter: blur(4px);
+}
+
+.card-content {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; 
+  gap: 12px;
+}
+
+.card-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--text-primary);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card-stats {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid rgba(152, 155, 165, 0.1);
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+.card-stat-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.card-stat-icon {
+  color: var(--accent);
+}

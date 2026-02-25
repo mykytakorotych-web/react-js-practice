@@ -7,6 +7,8 @@
   
   --text-primary: #F9FBFC;
   --text-secondary: #989BA5;
+
+  --accent: #2463EB;
 }
 
 *{
@@ -41,11 +43,27 @@ a {
   border-color: var(--text-primary);
 }
 
+#root {
+  overflow: hidden;
+  height: 100vh;
+}
+
 main {
   padding: 1rem 2rem;
+  overflow-y: auto;
+  scroll-behavior: smooth;
 }
 
 button, input {
   background: none;
   border: none;
 }
+
+button {
+  cursor: pointer;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--bg-hover); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-secondary); }

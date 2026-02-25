@@ -7,10 +7,10 @@ import { RouterProvider } from 'react-router'
 import { router } from './routes/routes.js'
 import { store } from './store/store.js'
 
-const container = document.getElementById("root")
-const root = createRoot(container)
-root.render(<StrictMode>
-  <Provider store={store}>
-    <RouterProvider router={router} />
-  </Provider>
-</StrictMode>)
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    <Provider store={store}>
+      <RouterProvider router={router}/>
+    </Provider>
+  </StrictMode>,
+)

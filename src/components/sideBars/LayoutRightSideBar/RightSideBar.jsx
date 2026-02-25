@@ -1,46 +1,43 @@
 "use client"
 
-import { Search, UserCog } from 'lucide-react'
-import { Link } from "react-router"
-import { useGetUsersQuery } from "../../../store/api/usersApi.js"
+import { Search, UserCog } from "lucide-react"
+import { useEffect, useState } from 'react'
 import "./RightSideBar.css"
+import { UsersSection } from './usersSection/UsersSection.jsx'
 
 export function RightSideBar() {
-  const { data, error, isLoading, isFetching } = useGetUsersQuery()
+  const [query, setQuery] = useState('')
+  const [debouncedQuery, setDebouncedQuery] = useState(''); // Для запроса в API
 
-  if (isLoading) return <div>Loading...</div>
-  if (error) return <div>Error: {error.message}</div>
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      const trimmed = query.trim();
+
+      if (trimmed.length > 0) {
+        setDebouncedQuery(trimmed);
+      } else {
+        setDebouncedQuery(''); 
+      }
+    }, 700);
+
+    return () => clearTimeout(handler);
+  }, [query]);
 
   return (
     <aside className="rightNavBar">
-      <section className='sectionSearch'>
-        <div className='searchInput'>
-          <button className='searchBtn'><Search size={18}/></button>
-          <input type="text" placeholder='Search for a friend'/>
+      <section className="sectionSearch">
+        <div className="searchInput">
+          <button className="searchBtn">
+            <Search size={18} />
+          </button>
+          <input type="text" placeholder="Search for a friend" value={query} onChange={e => setQuery(e.target.value)} />
         </div>
-        <button className='searchFilterBtn'>
-          <UserCog size={18}/>
+        <button className="searchFilterBtn">
+          <UserCog size={18} />
         </button>
       </section>
-      <section className='usersSection'>
-        <h3>Users</h3>
-        <ul className="userList">
-          {data.users.map(user => (
-            <li className="userItem hoverEffect" key={user.id}>
-              <Link to={`/user/${user.id}`}>
-                <img
-                  className="userImage"
-                  src={user.image}
-                  alt={user.firstName}
-                />
-                <div>
-                  <h4>{user.firstName}</h4>
-                </div>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </section>
+      
+        <UsersSection query={debouncedQuery} />
     </aside>
   )
 }

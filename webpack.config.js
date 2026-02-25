@@ -1,52 +1,43 @@
-import HtmlWebpackPlugin from "html-webpack-plugin"
-import commonPaths from './build_utils/config/commonPaths.js'
-import pkg from "./package.json" with { type: "json" }
+const path = require("path")
+const HtmlWebpackPlugin = require("html-webpack-plugin")
 
-const isDebug = !process.argv.includes("release")
-
-const port = process.env.PORT || 3000
-
-export default {
-  entry: commonPaths.entryPath,
+module.exports = {
+  entry: "./src/main.jsx",
   output: {
-    uniqueName: pkg.name,
-    publicPath: "/",
-    path: commonPaths.outputPath,
-    filename: `${pkg.version}/js/[name].[chunkhash:8].js`,
-    chunkFilename: `${pkg.version}/js/[name].[chunkhash:8].js`,
-    assetModuleFilename: isDebug
-      ? `images/[path][name].[contenthash:8][ext]`
-      : `images/[path][contenthash:8][ext]`,
-    crossOriginLoading: "anonymous",
+    path: path.resolve(__dirname, "dist"),
+    filename: "bundle.js",
+    clean: true,
+    publicPath: "/"
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: "public/index.html",
-      filename: "index.html",
-    }),
-  ],
-  devServer: {
-    port: port,
-    static: commonPaths.outputPath,
-    historyApiFallback: {
-      index: "index.html",
-    },
-    hot: true,
+  resolve: {
+    extensions: [".js", ".jsx"],
   },
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        exclude: /node_modules/, // exclude node_modules
-        use: ["babel-loader"],
+        exclude: /node_modules/,
+        type: "javascript/auto",
+        use: "babel-loader",
       },
       {
         test: /\.css$/,
         use: ["style-loader", "css-loader"],
-      },
+      }
     ],
   },
-  resolve: {
-    extensions: [".*", ".js", ".jsx"],
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: "./public/index.html",
+    }),
+  ], devServer: {
+    static: {
+      directory: path.join(__dirname, "dist"),
+    },
+    compress: true,
+    port: 3000,
+    open: true,
+    historyApiFallback: true
   },
+  mode: process.env.NODE_ENV || "development",
 }

@@ -1,6 +1,7 @@
 .siteLogo {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: .5rem
 }
 
@@ -12,4 +13,14 @@
   border-radius: 100%;
   width: 32px;
   height: 32px;
+}
+
+.siteLogo > h3 {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .siteLogo > h3 {
+    display: block;
+  }
 }

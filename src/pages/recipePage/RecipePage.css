@@ -1,0 +1,191 @@
+.recipe-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  min-height: 100vh;
+}
+
+/* Кнопка "Назад" */
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  margin-bottom: 20px;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.back-btn:hover {
+  color: var(--accent);
+}
+
+/* Сетка для десктопа */
+.recipe-grid {
+  display: grid;
+  gap: 32px;
+  /* По умолчанию 1 колонка (Mobile) */
+  grid-template-columns: 1fr; 
+}
+
+/* === Левая колонка (Фото и инфо) === */
+.recipe-hero {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.recipe-image-wrapper {
+  width: 100%;
+  aspect-ratio: 4 / 3; /* Квадратнее на мобилках */
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.recipe-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.recipe-header h1 {
+  font-size: 2rem;
+  line-height: 1.1;
+  margin-bottom: 12px;
+  background: linear-gradient(90deg, var(--text-primary), var(--text-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Карточки со статистикой (Время, калории) */
+.stats-bar {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.stat-item {
+  background: var(--bg-secondary);
+  padding: 10px 16px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  border: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.stat-item:hover {
+  border-color: var(--bg-hover);
+}
+
+.stat-icon {
+  color: var(--accent);
+}
+
+/* === Правая колонка (Ингредиенты и Шаги) === */
+.recipe-content {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+  border-left: 4px solid var(--accent);
+  padding-left: 12px;
+}
+
+/* Список ингредиентов */
+.ingredients-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ingredient-item {
+  background-color: var(--bg-secondary);
+  padding: 14px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.ingredient-item:hover {
+  background-color: var(--bg-hover);
+}
+
+/* Кастомный чекбокс */
+.check-circle {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--text-secondary);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.ingredient-item.checked .check-circle {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  position: relative;
+}
+
+.ingredient-item.checked span {
+  text-decoration: line-through;
+  color: var(--text-secondary);
+}
+
+/* Инструкции */
+.instructions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.step-item {
+  display: flex;
+  gap: 16px;
+}
+
+.step-number {
+  background-color: var(--bg-secondary);
+  color: var(--accent);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.step-text {
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+@media (min-width: 1200px) {
+  .recipe-grid {
+    grid-template-columns: 450px 1fr; 
+    align-items: start;
+  }
+
+  .recipe-image-wrapper {
+    aspect-ratio: 1 / 1; 
+    top: 20px;
+  }
+}

@@ -1,13 +1,8 @@
 .layout {
   display: grid;
-  grid-template-columns: 240px 3fr 240px;
+  grid-template-columns: clamp(52px, 20%, 240px) auto;
   height: inherit;
   min-height: 100vh;
-}
-
-.leftNavBar, .rightNavBar {
-  background: var(--bg-secondary);
-  padding: 1rem;
 }
 
 .navLink {
@@ -23,4 +18,8 @@
   color: var(--text-primary);
 }
 
-/* Right Sidebar */
+@media (min-width: 768px) {
+  .layout {
+    grid-template-columns: clamp(52px, 20%, 240px) 3fr clamp(100px, 20%, 240px);
+  }
+}

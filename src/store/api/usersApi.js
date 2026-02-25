@@ -6,7 +6,12 @@ export const usersApi = createApi({
   endpoints: (builder) => ({
 
     getUsers: builder.query({
-      query: (limit = 5) => `users/?limit=${limit}`,
+      query: (searchQuery) => {
+        return {
+          url: `users/search`,
+          params: { q: searchQuery, limit: searchQuery.length < 3 ? '10' : '0' },
+        }
+      },
     }),
 
   }),

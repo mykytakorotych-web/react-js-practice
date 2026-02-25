@@ -1,6 +1,9 @@
-import { NavLink } from "react-router"
+import { Link, NavLink } from "react-router"
 import { navigationPages } from "../../../routes/routeLinks"
-import { SiteLogo } from "../../SiteLogo/SiteLogo"
+
+import { DoorOpenIcon } from 'lucide-react'
+import { SiteLogo } from '../../ui/siteLogo/SiteLogo'
+import "./LeftSideBar.css"
 
 export function LeftSideBar() {
   return (
@@ -10,10 +13,11 @@ export function LeftSideBar() {
         {navigationPages.map(item => (
           <NavLink key={item.href} className="navLink hoverEffect" to={item.href}>
             {item.icon}
-            <span>{item.name}</span>
+            <span className='leftNavBarLinkName'>{item.name}</span>
           </NavLink>
         ))}
       </nav>
+      <Link to='/login' className='loginLink'><DoorOpenIcon/><span>Login</span></Link>
     </aside>
   )
 }

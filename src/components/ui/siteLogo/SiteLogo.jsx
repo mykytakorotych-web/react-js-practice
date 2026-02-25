@@ -7,7 +7,7 @@ export function SiteLogo() {
       <span className='logoWrapper'>
         <Gitlab fill='var(--text-primary)'/>
       </span>
-      <h3>Anikama</h3>
+      <h3>YumYum</h3>
     </div>
   )
 }
