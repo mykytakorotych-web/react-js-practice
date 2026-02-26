@@ -1,5 +1,7 @@
 # 🍳 React Recipe App
 
+**Live Demo:** https://react-js-practice-lhax.vercel.app/
+
 A fast, responsive, and accessible Single Page Application (SPA) for browsing delicious recipes. Built with modern React, Redux Toolkit, and optimized for maximum performance.
 
 <img width="1919" height="968" alt="image" src="https://github.com/user-attachments/assets/6d317f59-363b-4f40-b6a8-58fde02faac6" />
@@ -79,3 +81,4 @@ To test the authentication flow, you can use the following DummyJSON test user:
 - **Username**: emilys
 
 - **Password**: emilyspass
+
