@@ -1,7 +1,7 @@
 "use client"
+import { RecipeCard } from '../../components/home/recipeCard/RecipeCard'
 import { Loader } from "../../components/ui/loader/Loader"
 
-import { RecipeCard } from "../../components/home/recioeCard/RecipeCard"
 import { useInfinityScroll } from '../../hooks/useInfinityScroll'
 import "./HomePage.css"
 
