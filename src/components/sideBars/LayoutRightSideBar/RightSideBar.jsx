@@ -27,9 +27,9 @@ export function RightSideBar() {
     <aside className="rightNavBar">
       <section className="sectionSearch">
         <div className="searchInput">
-          <button className="searchBtn">
+          <div className="searchIcon" aria-hidden="true">
             <Search size={18} />
-          </button>
+          </div>
           <input type="text" placeholder="Search for a friend" value={query} onChange={e => setQuery(e.target.value)} />
         </div>
         <button className="searchFilterBtn">

@@ -51,7 +51,7 @@ export function LeftSideBar() {
             <span>Logout</span>
           </button>
         ) : (
-          <Link to="/login" className="loginLink">
+          <Link to="/login" className="loginLink" aria-label="Go to Login page">
             <DoorOpenIcon />
             <span>Login</span>
           </Link>

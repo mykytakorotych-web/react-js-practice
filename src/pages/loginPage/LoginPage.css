@@ -5,7 +5,7 @@
 }
 
 .loginSection {
-  width: 45%; /* Ширина левой колонки */
+  width: 45%; 
   background-color: var(--bg-primary);
   display: flex;
   justify-content: center;
@@ -50,7 +50,6 @@
   background-color: #252936;
 }
 
-/* Кнопка Log in */
 .btnPrimary {
   width: 100%;
   padding: 14px;
@@ -66,14 +65,6 @@
 
 .btnPrimary:hover {
   opacity: 0.85;
-}
-
-/* Социальные кнопки */
-.socialLogin {
-  display: flex;
-  gap: 1rem;
-  margin-top: 1.5rem;
-  justify-content: space-between;
 }
 
 .footerLink {
@@ -97,7 +88,6 @@
   position: relative;
 }
 
-/* Тег игры внизу справа */
 .gameTag {
   position: absolute;
   bottom: 2rem;

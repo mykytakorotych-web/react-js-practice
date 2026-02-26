@@ -74,6 +74,7 @@
 
   .leftNavBar > nav {
     align-items: start;
+    width: 100%;
   }
   .navLink {
     width: 100%;

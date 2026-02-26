@@ -3,12 +3,12 @@ import { memo } from 'react'
 import { Link } from 'react-router'
 import './RecipeCard.css'
 
-export const RecipeCard = memo(function RecipeCard({ recipe }) {
+export const RecipeCard = memo(function RecipeCard({ recipe, priority = false }) {
   const totalTime = (recipe.prepTimeMinutes || 0) + (recipe.cookTimeMinutes || 0);
 
   return (
     <article className="recipe-card">
-      <Link to={`/recipe/${recipe.id}`} className="recipe-card-link">
+      <Link to={`/recipe/${recipe.id}`} className="recipe-card-link" aria-label="Go to Recipe page">
         
         <div className="card-image-wrapper">
           {recipe.cuisine && (
@@ -19,9 +19,10 @@ export const RecipeCard = memo(function RecipeCard({ recipe }) {
             src={recipe.image} 
             alt={recipe.name} 
             className="card-image"
-            loading="lazy" 
-            width="400"    
-            height="266"
+            loading={priority ? "eager" : "lazy"} 
+            fetchpriority={priority ? "high" : "auto"} 
+            width="260"    
+            height="195"
           />
         </div>
 

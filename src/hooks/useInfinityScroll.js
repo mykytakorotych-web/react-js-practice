@@ -3,9 +3,10 @@ import { useGetRecipesQuery } from '../store/api/recipesApi'
 
 export const useInfinityScroll = () => {
   const [skip, setSkip] = useState(0)
+  const LIMIT = 10
 
   const { data, error, isLoading, isFetching } = useGetRecipesQuery({
-    limit: 10,
+    limit: LIMIT,
     skip,
   })
 
@@ -16,12 +17,12 @@ export const useInfinityScroll = () => {
       entries => {
         if (entries[0].isIntersecting && !isFetching) {
           if (data && data.recipes.length < data.total) {
-            setSkip(prev => prev + 10)
+            setSkip(prev => prev + LIMIT)
           }
         }
       },
       {
-        threshold: 1.0,
+        threshold: 1.0
       },
     )
 

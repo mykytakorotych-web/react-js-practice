@@ -6,7 +6,7 @@ import { useInfinityScroll } from '../../hooks/useInfinityScroll'
 import "./HomePage.css"
 
 export function HomePage() {
-  const {data, error, isFetching, isLoading} = useInfinityScroll()
+  const {data, error, isFetching, isLoading, observerRef} = useInfinityScroll()
 
   if (isLoading) return <Loader />
   if (error) return <div>Error: {error.message}</div>
@@ -14,9 +14,9 @@ export function HomePage() {
   return (
     <main>
       <ul className="recipeList">
-        {data.recipes.map(recipe => (
+        {data.recipes.map((recipe, idx) => (
           <li key={recipe.id}>
-            <RecipeCard recipe={recipe} />
+            <RecipeCard recipe={recipe} priority={idx === 0}/>
           </li>
         ))}
       </ul>
