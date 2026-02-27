@@ -15,8 +15,8 @@ export function HomePage() {
     <main>
       <ul className="recipeList">
         {data.recipes.map((recipe, idx) => (
-          <li key={recipe.id}>
-            <RecipeCard recipe={recipe} priority={idx === 0}/>
+          <li key={recipe.name}>
+            <RecipeCard recipe={recipe} priority={idx < 3}/>
           </li>
         ))}
       </ul>

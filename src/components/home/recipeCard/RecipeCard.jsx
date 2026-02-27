@@ -20,9 +20,9 @@ export const RecipeCard = memo(function RecipeCard({ recipe, priority = false })
             alt={recipe.name} 
             className="card-image"
             loading={priority ? "eager" : "lazy"} 
-            fetchpriority={priority ? "high" : "auto"} 
-            width="260"    
-            height="195"
+            fetchPriority={priority ? "high" : "auto"} 
+            width="233"    
+            height="175"
           />
         </div>
 

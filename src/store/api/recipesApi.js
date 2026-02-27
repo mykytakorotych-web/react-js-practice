@@ -1,8 +1,6 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { baseApi } from './baseApi'
 
-export const recipesApi = createApi({
-  reducerPath: 'recipesApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://dummyjson.com/' }),
+export const recipesApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
 
     getRecipes: builder.query({
@@ -14,18 +12,26 @@ export const recipesApi = createApi({
 
       merge: (currentCache, newItems) => {
         currentCache.recipes.push(...newItems.recipes)
+
+        if (newItems.recipes.length === 0) {
+          currentCache.total = currentCache.recipes.length
+        }
       },
 
       forceRefetch({ currentArg, previousArg }) {
         return currentArg?.skip !== previousArg?.skip
       },
+
+      providesTags: ['Recipes']
     }),
 
     getSingleRecipe: builder.query({
       query: (id) => `recipes/${id}`,
+      providesTags: ['Recipes']
     })
 
   }),
+  overrideExisting: false,
 })
 
 

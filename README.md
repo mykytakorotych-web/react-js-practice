@@ -12,7 +12,7 @@ This project is a comprehensive recipe application that interacts with the [Dumm
 
 ### 🎯 Key Features
 
-- **Secure Authentication:** JWT-based login and user session management using `js-cookie`, but without refetching tokens.
+- **Secure Authentication:** JWT-based login and user session management using `js-cookie`.
 - **Infinite Scrolling:** Seamlessly load new recipes as the user scrolls, powered by RTK Query's cache merging.
 - **Performance Optimized:** Implements lazy loading for images and routes, optimized font rendering (`font-display: swap`), and priority fetching to ensure a blazing-fast Largest Contentful Paint (LCP).
 - **Fully Accessible (a11y):** Keyboard navigable custom checkboxes, semantic HTML structure (`<ol>`, `aria-attributes`), and screen-reader friendly design.
@@ -81,4 +81,3 @@ To test the authentication flow, you can use the following DummyJSON test user:
 - **Username**: emilys
 
 - **Password**: emilyspass
-

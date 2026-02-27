@@ -3,17 +3,17 @@ import { navigationPages } from "../../../routes/routeLinks"
 
 import { DoorOpenIcon, LogOut } from "lucide-react"
 import { useDispatch, useSelector } from "react-redux"
+import { useGetMeQuery } from '../../../store/api/authApi'
 import {
   logOut,
-  selectCurrentUser,
-  selectIsAuthenticated,
+  selectIsAuthenticated
 } from "../../../store/slices/authSlice"
 import { SiteLogo } from "../../ui/siteLogo/SiteLogo"
 import "./LeftSideBar.css"
 
 export function LeftSideBar() {
   const isAuth = useSelector(selectIsAuthenticated)
-  const user = useSelector(selectCurrentUser)
+  const {data} = useGetMeQuery()
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -38,11 +38,11 @@ export function LeftSideBar() {
           </NavLink>
         ))}
       </nav>
-      <div className='leftNavBarFooter'>
-        {isAuth && user && (
+      <div className="leftNavBarFooter">
+        {isAuth && data && (
           <div className="userProfileCard">
-            <img src={user.image ? user.image : ""} alt={user.username} />
-            <h4>{user.username[0].toUpperCase() + user.username.slice(1)}</h4>
+            <img src={data.image ? data.image : ""} alt={data.username} />
+            <h4>{data.username[0].toUpperCase() + data.username.slice(1)}</h4>
           </div>
         )}
         {isAuth ? (

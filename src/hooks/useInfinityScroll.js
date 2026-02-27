@@ -11,11 +11,12 @@ export const useInfinityScroll = () => {
   })
 
   const observerRef = useRef(null)
+  const hasMore = data ? data.recipes.length < data.total : true
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       entries => {
-        if (entries[0].isIntersecting && !isFetching) {
+        if (entries[0].isIntersecting && !isFetching && hasMore) {
           if (data && data.recipes.length < data.total) {
             setSkip(prev => prev + LIMIT)
           }
@@ -35,7 +36,7 @@ export const useInfinityScroll = () => {
         observer.unobserve(observerRef.current)
       }
     }
-  }, [isFetching, data])
+  }, [isFetching, hasMore])
 
 
   return {

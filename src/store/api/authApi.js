@@ -1,60 +1,58 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import Cookies from 'js-cookie'
-import { setCredentials, setUser } from '../slices/authSlice'
+import Cookies from "js-cookie"
+import { setCredentials, setUser } from "../slices/authSlice"
+import { baseApi } from './baseApi'
 
-export const authApi = createApi({
-  reducerPath: 'authApi',
-  baseQuery: fetchBaseQuery({
-    baseUrl: 'https://dummyjson.com/',
-    prepareHeaders: (headers, { getState }) => {
-      const token = getState().auth.token
-      if (token) {
-        headers.set('authorization', `Bearer ${token}`)
-      }
-      return headers
-    }
-  }),
-  endpoints: (builder) => ({
+export const authApi = baseApi.injectEndpoints({
+  endpoints: builder => ({
     login: builder.mutation({
-      query: (credentials) => ({
-        url: 'auth/login',
-        method: 'POST',
+      query: credentials => ({
+        url: "auth/login",
+        method: "POST",
         body: credentials,
       }),
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled
 
+          const userObj = {
+            id: data.id,
+            username: data.username,
+            image: data.image
+          }
 
-          Cookies.set('token', data.accessToken, { expires: 1, secure: true })
-          Cookies.set('refreshToken', data.refreshToken, { expires: 7, secure: true })
-          localStorage.setItem('user', JSON.stringify(userObj))
+          Cookies.set("token", data.accessToken, { expires: 1, secure: true })
+          Cookies.set("refreshToken", data.refreshToken, {
+            expires: 7,
+            secure: true,
+          })
+          localStorage.setItem("user", JSON.stringify(userObj))
 
-          dispatch(setCredentials({
-            user: {
-              id: data.id,
-              username: data.username,
-              image: data.image
-            },
-            token: data.accessToken
-          }))
+          dispatch(
+            setCredentials({
+              user: userObj,
+              token: data.accessToken,
+            }),
+          )
         } catch (err) {
           console.error("Error on login", err)
         }
-      }
+      },
+      invalidatesTags: ['Auth'],
+      extraOptions: { skipReauth: true },
     }),
     getMe: builder.query({
-      query: () => 'auth/me',
+      query: () => "auth/me",
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled
           dispatch(setUser(data))
-
         } catch (err) {
           console.error("Error while fetching profile", err)
         }
       },
+      providesTags: ['Auth'],
     }),
-  })
+  }),
+  overrideExisting: false,
 })
 export const { useLoginMutation, useGetMeQuery } = authApi

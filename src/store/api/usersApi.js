@@ -1,8 +1,6 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { baseApi } from './baseApi'
 
-export const usersApi = createApi({
-  reducerPath: 'usersApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://dummyjson.com/' }),
+export const usersApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
 
     getUsers: builder.query({
@@ -12,8 +10,10 @@ export const usersApi = createApi({
           params: { q: searchQuery, limit: searchQuery.length < 3 ? '10' : '0' },
         }
       },
+      providesTags: ['Users']
     })
   }),
+  overrideExisting: false,
 })
 
 
