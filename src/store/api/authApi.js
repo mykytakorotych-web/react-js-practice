@@ -25,20 +25,10 @@ export const authApi = createApi({
         try {
           const { data } = await queryFulfilled
 
-          const userObj = {
-            id: data.id,
-            username: data.username,
-            email: data.email,
-            firstName: data.firstName,
-            lastName: data.lastName,
-            image: data.image
-          }
-
 
           Cookies.set('token', data.accessToken, { expires: 1, secure: true })
           Cookies.set('refreshToken', data.refreshToken, { expires: 7, secure: true })
           localStorage.setItem('user', JSON.stringify(userObj))
-          dispatch(setCredentials({ user: userObj, token: data.accessToken }))
 
           dispatch(setCredentials({
             user: {
