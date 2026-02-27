@@ -7,7 +7,7 @@ import { useLoginForm } from "../../hooks/useLoginForm"
 import "./LoginPage.css"
 
 export function LoginPage() {
-  const { isLoading, error, handleSubmit, navigate } = useLoginForm()
+  const { isLoading, error, handleSubmit } = useLoginForm()
 
   return (
     <div className="container">
